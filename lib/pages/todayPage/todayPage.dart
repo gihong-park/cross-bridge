@@ -1,4 +1,5 @@
-import 'package:_04_health_check/widgets/healthAppBar/healthAppBar.dart';
+import 'package:_04_health_check/class/const.dart';
+import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -20,7 +21,7 @@ class _TodayPageState extends State<TodayPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: const HealthAppBar(),
+      appBar: const CBAppBar(),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.black,
         key: _navigationKey,
@@ -57,8 +58,8 @@ class _TodayPageState extends State<TodayPage> {
                 180 -
                 MediaQuery.of(context).viewPadding.bottom,
             child: ListView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: horizontalPadding, vertical: 16),
               children: [
                 const Title(
                   title: "Warm Ups",

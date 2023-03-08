@@ -1,6 +1,7 @@
 import 'package:widgetbook/widgetbook.dart';
 
 import 'archivePage/archivePage_uc.dart';
+import 'generatePage/generatePage_uc.dart';
 import 'homePage/homePage_uc.dart';
 import 'loginPage/loginPage_uc.dart';
 import 'recordingPage/recordingPage_uc.dart';
@@ -15,6 +16,7 @@ WidgetbookCategory pages = WidgetbookCategory(
     recordingPage,
     todayPage,
     archivePage,
-    reservePage
+    reservePage,
+    generatePage,
   ],
 );

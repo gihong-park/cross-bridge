@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:_04_health_check/class/const.dart';
 import 'package:_04_health_check/pages/archivePage/archivePage.dart';
+import 'package:_04_health_check/pages/generatePage/generatePage.dart';
 import 'package:_04_health_check/pages/recordingPage/recordingPage.dart';
 import 'package:_04_health_check/pages/reservePage/reservePage.dart';
 import 'package:_04_health_check/pages/testPage/testPage.dart';
 import 'package:_04_health_check/pages/todayPage/todayPage.dart';
 import 'package:_04_health_check/widgets/footer/footer.dart';
-import 'package:_04_health_check/widgets/healthAppBar/healthAppBar.dart';
+import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,15 +25,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HealthAppBar(),
+      appBar: CBAppBar(),
       body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 100),
+            MenuButton(
+              text: "운동 만들기",
+              navigatePage: GeneratePage(),
+            ),
             MenuButton(text: "오늘의 운동"),
-            MenuButton(text: "예약하기", navigatePage: ReservePage()),
+            // MenuButton(text: "예약하기", navigatePage: ReservePage()),
             MenuButton(
               text: "기록하기",
               navigatePage: RecordingPage(),
@@ -58,7 +64,8 @@ class MenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 32),
+      padding: const EdgeInsets.symmetric(
+          vertical: 12.0, horizontal: horizontalPadding),
       child: Container(
         width: double.infinity,
         child: TextButton(

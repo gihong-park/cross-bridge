@@ -13,20 +13,20 @@ class WidgetbookHotReload extends StatelessWidget {
         categories: [
           pages,
         ],
-        appInfo: AppInfo(name: 'health_check'),
+        appInfo: AppInfo(name: 'cross_bridge'),
         themes: [
           WidgetbookTheme(
             name: 'Light',
             data: themeData,
           ),
-          WidgetbookTheme(
-            name: 'Dark',
-            data: ThemeData.dark(),
-          ),
         ],
         devices: [
           Apple.iPhone13ProMax,
           Apple.iPhone12,
+          Apple.iPhoneSE2020,
+        ],
+        supportedLocales: [
+          Locale.fromSubtags(languageCode: 'kr'),
         ]);
   }
 }

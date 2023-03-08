@@ -1,7 +1,8 @@
 import 'dart:developer';
 
+import 'package:_04_health_check/class/const.dart';
 import 'package:_04_health_check/pages/todayPage/todayPage.dart';
-import 'package:_04_health_check/widgets/healthAppBar/healthAppBar.dart';
+import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -21,7 +22,7 @@ class _ReservePageState extends State<ReservePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HealthAppBar(),
+      appBar: CBAppBar(),
       bottomNavigationBar: CurvedNavigationBar(
         color: Colors.black,
         key: navigationKey,
@@ -58,8 +59,8 @@ class _ReservePageState extends State<ReservePage> {
                 180 -
                 MediaQuery.of(context).viewPadding.bottom,
             child: ListView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: horizontalPadding, vertical: 16),
               children: [
                 Text("※: 한 수업 예약가능 최대인원 14명 입니다.",
                     style: GoogleFonts.notoSans(fontSize: 16)),
@@ -72,7 +73,7 @@ class _ReservePageState extends State<ReservePage> {
                   child: Text(
                     "> 오늘의 운동 보러가기",
                     style:
-                        GoogleFonts.notoSans(fontSize: 14, color: Colors.black),
+                        GoogleFonts.notoSans(fontSize: 14, color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 50),

@@ -1,253 +1,388 @@
-import 'package:_04_health_check/widgets/healthAppBar/healthAppBar.dart';
-import 'package:flutter/foundation.dart';
+import 'package:_04_health_check/class/enum.dart';
+import 'package:_04_health_check/class/extension.dart';
+import 'package:_04_health_check/class/model/record/recordModel.dart';
+import 'package:_04_health_check/class/model/wod/wod.dart';
+import 'package:_04_health_check/class/provider/record.dart';
+import 'package:_04_health_check/util/util.dart';
+import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
-enum Level { lv1, lv2, lv3 }
+import '../../class/const.dart';
+import '../../widgets/CBDragTarget/cbDragTarget.dart';
+import '../../widgets/dragDropCard/dragDropCard.dart';
 
-extension Capitalized on String {
-  String capitalized() =>
-      substring(0, 1).toUpperCase() + substring(1).toLowerCase();
-}
-
-const List<Level> list = <Level>[
-  Level.lv1,
-  Level.lv2,
-  Level.lv3,
-];
-
-class WODItem {
-  WODItem(
-      {required this.key,
-      required this.level,
-      required this.name,
-      required this.weight,
-      required this.times});
-  Key key;
-  Level level;
-  String name;
-  double weight;
-  int times;
-}
-
-class RecordingPage extends StatefulWidget {
+class RecordingPage extends StatefulHookConsumerWidget {
   const RecordingPage({super.key});
 
   @override
-  State<RecordingPage> createState() => _RecordingPageState();
+  ConsumerState<RecordingPage> createState() => _RecordingPageState();
 }
 
-class _RecordingPageState extends State<RecordingPage> {
-  List<WODItem> wodItems = [
-    WODItem(
-        key: UniqueKey(), level: Level.lv1, name: "PC", weight: 65, times: 20),
-    WODItem(
-        key: UniqueKey(), level: Level.lv2, name: "STO", weight: 65, times: 15),
-    WODItem(
-        key: UniqueKey(), level: Level.lv3, name: "HPC", weight: 65, times: 20),
-  ];
+class _RecordingPageState extends ConsumerState<RecordingPage> {
   final _formKey = GlobalKey<FormState>();
-  final _listKey = GlobalKey<AnimatedListState>();
-  final List<int> _items = List<int>.generate(50, (int index) => index);
+  var _listKey = GlobalKey<AnimatedListState>();
+  final _textEditController = TextEditingController();
+  DateFormat dateFormat = DateFormat("yyyy.MM.dd");
+  DateTime selectedDate = DateTime.now();
+  Set<String> results = {};
+
+  void _insert(ValueNotifier<RecordModel> record) {
+    final wodItem = WODItem(
+        id: uuid.v4(),
+        level: Level.lv1,
+        name: "",
+        weight: 0,
+        reps: 0,
+        cal: 0,
+        distance: 0);
+    record.value =
+        record.value.copyWith(wodItems: [...record.value.wodItems, wodItem]);
+    _listKey.currentState!.insertItem(record.value.wodItems.length - 1);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final record =
+        useState<RecordModel>(const RecordModel(result: {}, wodItems: []));
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: const HealthAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: ListView(
-          children: [
-            Form(
-              key: _formKey,
-              child: AnimatedList(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                key: _listKey,
-                initialItemCount: wodItems.length,
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                itemBuilder: (context, index, _) {
-                  return LongPressDraggable<WODItem>(
-                    key: UniqueKey(),
-                    feedback: TestWidget(
-                      wodItem: wodItems[index],
-                    ),
-                    data: wodItems[index],
-                    child: CustomDragTarget<WODItem>(
-                        onAccept: (data, targetData) {
-                          if (targetData.key == data.key) return;
-                          setState(() {
-                            int oldIndex = wodItems.indexWhere(
-                                (element) => element.key == data.key);
-                            wodItems[index] = WODItem(
-                                key: UniqueKey(),
-                                level: data.level,
-                                name: data.name,
-                                weight: data.weight,
-                                times: data.times);
-                            _listKey.currentState!.removeItem(
-                                oldIndex,
-                                (context, animation) => SizeTransition(
-                                    sizeFactor: animation,
-                                    child: TestWidget(wodItem: data)));
-                            wodItems.removeWhere(
-                                (element) => element.key == data.key);
-                          });
-                        },
-                        data: wodItems[index],
-                        builder: (context, a, b) {
-                          return TestWidget(wodItem: wodItems[index]);
-                        }),
-                  );
-                },
-              ),
+      appBar: const CBAppBar(),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+            horizontal: horizontalPadding, vertical: 12),
+        children: [
+          Container(
+            constraints: BoxConstraints(minHeight: 120),
+            decoration: BoxDecoration(
+              border: Border.all(width: 2),
+              borderRadius: BorderRadius.circular(14),
             ),
-            Container(
-              width: double.infinity,
-              child: TextButton(
-                child: Text("Submit"),
-                onPressed: () => _formKey.currentState?.save(),
-              ),
+            child: Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width -
+                        horizontalPadding * 2,
+                    maxHeight: double.infinity,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text("Date",
+                              style: theme.textTheme.bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w700)),
+                          TextButton(
+                            child: Text(dateFormat.format(selectedDate),
+                                style: theme.textTheme.bodyMedium),
+                            onPressed: () {
+                              showDatePickerPop(context);
+                            },
+                            style: TextButtonTheme.of(context).style?.copyWith(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      theme.colorScheme.background),
+                                ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Result",
+                            style: theme.textTheme.bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            width: 12,
+                          ),
+                          Container(
+                            constraints: BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width -
+                                    horizontalPadding * 5),
+                            child: Wrap(
+                              runSpacing: 6,
+                              spacing: 8,
+                              children: [
+                                ...results
+                                    .map(
+                                      (rst) => ActionChip(
+                                        avatar: Icon(
+                                          Icons.cancel_outlined,
+                                          color: Colors.black,
+                                        ),
+                                        label: Text(
+                                          rst,
+                                          style: theme.textTheme.labelSmall,
+                                        ),
+                                        padding: EdgeInsets.zero,
+                                        labelPadding: const EdgeInsets.only(
+                                            left: 0,
+                                            right: 8,
+                                            top: -3,
+                                            bottom: -3),
+                                        onPressed: () => setState(() {
+                                          results.remove(rst);
+                                        }),
+                                        materialTapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                      ),
+                                    )
+                                    .toList(),
+                                SizedBox(
+                                  width: 82,
+                                  height: 34,
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                        fit: FlexFit.loose,
+                                        child: AutoSizeTextField(
+                                          maxFontSize: 14,
+                                          controller: _textEditController,
+                                          minWidth: 60,
+                                          fullwidth: false,
+                                          style: theme.textTheme.labelLarge,
+                                          decoration: InputDecoration.collapsed(
+                                            border: UnderlineInputBorder(),
+                                            hintStyle: theme
+                                                .textTheme.labelMedium
+                                                ?.copyWith(color: Colors.grey),
+                                            hintText: "무게/lb",
+                                          ),
+                                          onSubmitted: (value) {
+                                            setState(() {
+                                              results.add(value.capitalized());
+                                            });
+                                            _textEditController.clear();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 14,
+                  child: IconButton(
+                    icon: Icon(Icons.add_circle_outline_rounded),
+                    onPressed: () => _insert(record),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TestWidget extends StatefulWidget {
-  TestWidget({super.key, required this.wodItem});
-  WODItem wodItem;
-
-  @override
-  State<TestWidget> createState() => _TestWidgetState();
-}
-
-class _TestWidgetState extends State<TestWidget> {
-  Level dropdownValue = list.first;
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      child: SizedBox(
-        height: 132,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DropdownButton<Level>(
-                value: widget.wodItem.level,
-                style: Theme.of(context).textTheme.labelMedium,
-                items: list.map<DropdownMenuItem<Level>>((Level value) {
-                  return DropdownMenuItem<Level>(
-                    value: value,
-                    child: Text(value.name.capitalized()),
-                  );
-                }).toList(),
-                onChanged: (Level? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    if (value != null) {
-                      dropdownValue = value;
-                    }
-                  });
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Container(
-                    width: 64,
-                    child: TextFormField(
-                      initialValue: widget.wodItem.name,
-                      style: textTheme.bodySmall,
-                      maxLines: 2,
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    child: TextFormField(
-                      initialValue: widget.wodItem.weight.toString(),
-                      style: textTheme.bodySmall,
-                      decoration: InputDecoration(
-                          labelText: "무게",
-                          labelStyle: textTheme.bodyMedium,
-                          floatingLabelStyle: textTheme.bodySmall,
-                          suffixText: "lb",
-                          suffixStyle: textTheme.bodySmall),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 60,
-                    child: TextFormField(
-                      initialValue: widget.wodItem.times.toString(),
-                      style: textTheme.bodySmall,
-                      decoration: InputDecoration(
-                          labelText: "횟수",
-                          labelStyle: textTheme.bodyMedium,
-                          floatingLabelStyle: textTheme.bodySmall,
-                          suffixText: "회",
-                          suffixStyle: textTheme.bodySmall),
-                    ),
-                  ),
-                ],
-              ),
-            ],
           ),
-        ),
+          SizedBox(
+            height: 12,
+          ),
+          Form(
+            key: _formKey,
+            child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                Container(
+                  constraints: BoxConstraints(
+                    minHeight: 132,
+                    minWidth: MediaQuery.of(context).size.width -
+                        horizontalPadding * 2,
+                    maxWidth: MediaQuery.of(context).size.width -
+                        horizontalPadding * 2,
+                  ),
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Result",
+                            style: theme.textTheme.bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          Wrap(
+                            spacing: 12,
+                            runSpacing: 6,
+                            children: [
+                              ...results.map(
+                                (rst) => SizedBox(
+                                  width: 60,
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return '입력필요';
+                                      }
+                                      return null;
+                                    },
+                                    style: theme.textTheme.bodySmall,
+                                    decoration: InputDecoration(
+                                      labelText: rst.split('/')[0],
+                                      labelStyle: theme.textTheme.bodyMedium,
+                                      floatingLabelStyle:
+                                          theme.textTheme.bodySmall,
+                                      suffixText: rst.split('/').length == 2
+                                          ? rst.split('/')[1]
+                                          : "",
+                                    ),
+                                    onSaved: (newValue) {
+                                      ref
+                                          .watch(recordProvider.notifier)
+                                          .addResult(rst.split('/')[0],
+                                              int.parse(newValue ?? "0"));
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                AnimatedList(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  key: _listKey,
+                  initialItemCount: record.value.wodItems.length,
+                  itemBuilder: (context, index, anim) {
+                    final wodItem = record.value.wodItems[index];
+                    return SizeTransition(
+                      sizeFactor: anim,
+                      child: LongPressDraggable<WODItem>(
+                        key: UniqueKey(),
+                        feedback: DragDropCard(
+                          index: index,
+                          record: record,
+                          aniListKey: _listKey,
+                          deleteFunc: setAniList(index, record),
+                        ),
+                        data: wodItem,
+                        child: CBDragTarget<WODItem>(
+                            onAccept: (data, targetData) {
+                              if (identityHashCode(targetData) ==
+                                  identityHashCode(data)) return;
+                              // setState(() {
+                              //   int oldIndex = record.wodItems.indexWhere(
+                              //       (element) => element.key == data.key);
+                              //   wodItems[index] = WODItem(
+                              //       key: UniqueKey(),
+                              //       level: data.level,
+                              //       name: data.name,
+                              //       weight: data.weight,
+                              //       times: data.times);
+                              //   _listKey.currentState!.removeItem(
+                              //     oldIndex,
+                              //     (context, animation) => SizeTransition(
+                              //       sizeFactor: animation,
+                              //       child: DragDropCard(
+                              //         wodItem: data,
+                              //         aniListKey: _listKey,
+                              //         deleteFunc: setAniList(index),
+                              //       ),
+                              //     ),
+                              //   );
+                              //   wodItems.removeWhere(
+                              //       (element) => element.key == data.key);
+                              // });
+                            },
+                            data: wodItem,
+                            builder: (context, a, b) {
+                              return DragDropCard(
+                                index: index,
+                                record: record,
+                                aniListKey: _listKey,
+                                deleteFunc: setAniList(index, record),
+                              );
+                            }),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: TextButton(
+              child: Text("Submit"),
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState?.save();
+
+                  setState(() {
+                    _listKey = GlobalKey();
+                    record.value = const RecordModel(result: {}, wodItems: []);
+                  });
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
-}
 
-class CustomDragTarget<T extends Object> extends StatefulWidget {
-  const CustomDragTarget({
-    super.key,
-    required this.builder,
-    this.onWillAccept,
-    this.onAccept,
-    this.onAcceptWithDetails,
-    this.onLeave,
-    this.onMove,
-    this.hitTestBehavior = HitTestBehavior.translucent,
-    required this.data,
-  });
-
-  final DragTargetBuilder<T> builder;
-  final DragTargetWillAccept<T>? onWillAccept;
-  final void Function(T data, T targetData)? onAccept;
-  final DragTargetAcceptWithDetails<T>? onAcceptWithDetails;
-  final DragTargetLeave<T>? onLeave;
-  final DragTargetMove<T>? onMove;
-  final HitTestBehavior hitTestBehavior;
-  final T data;
-
-  @override
-  State<CustomDragTarget<T>> createState() => _CustomDragTargetState<T>();
-}
-
-class _CustomDragTargetState<T extends Object>
-    extends State<CustomDragTarget<T>> {
-  @override
-  Widget build(BuildContext context) {
-    return DragTarget(
-      builder: widget.builder,
-      onAccept: (data) {
-        widget.onAccept?.call(data! as T, widget.data);
+  Future<void> showDatePickerPop(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2020), //시작일
+      lastDate: DateTime(2024), //마지막일
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.dark(), //다크 테마
+          child: child!,
+        );
       },
     );
+    setState(() {
+      selectedDate = picked ?? selectedDate;
+    });
+  }
+
+  void Function(WODItem) setAniList(
+      int index, ValueNotifier<RecordModel> record) {
+    return (WODItem wodItem) {
+      ref.watch(recordProvider.notifier).removeWodItem(wodItem);
+      setState(() {
+        _listKey.currentState!.removeItem(
+          index,
+          (context, animation) => SizeTransition(
+            sizeFactor: animation,
+            child: DragDropCard(
+              index: index,
+              record: record,
+              aniListKey: _listKey,
+              deleteFunc: setAniList(index, record),
+            ),
+          ),
+        );
+      });
+    };
   }
 }

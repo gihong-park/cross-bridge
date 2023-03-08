@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CORSS_BRIDGE }}'
-          projectId: corss-bridge
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CROSS_BRIDGE_B0DB6 }}'
+          projectId: cross-bridge-b0db6

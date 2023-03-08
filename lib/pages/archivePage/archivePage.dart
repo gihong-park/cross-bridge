@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:_04_health_check/widgets/healthAppBar/healthAppBar.dart';
+import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -22,7 +22,7 @@ class _ArchivePageState extends State<ArchivePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HealthAppBar(),
+      appBar: const CBAppBar(),
       body: ListView(
         children: [
           SizedBox(height: 20),
