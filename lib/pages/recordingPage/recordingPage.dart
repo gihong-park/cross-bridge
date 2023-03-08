@@ -30,7 +30,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
   DateTime selectedDate = DateTime.now();
   Set<String> results = {};
 
-  void _insert(ValueNotifier<RecordModel> record) {
+  void _insert() {
     final wodItem = WODItem(
         id: uuid.v4(),
         level: Level.lv1,
@@ -39,15 +39,18 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
         reps: 0,
         cal: 0,
         distance: 0);
-    record.value =
-        record.value.copyWith(wodItems: [...record.value.wodItems, wodItem]);
-    _listKey.currentState!.insertItem(record.value.wodItems.length - 1);
+    // record.value =
+    //     record.value.copyWith(wodItems: [...record.value.wodItems, wodItem]);
+    final record = ref.watch(recordProvider);
+    ref.watch(recordProvider.notifier).addWodItem(wodItem);
+    _listKey.currentState!.insertItem(record.wodItems.length);
   }
 
   @override
   Widget build(BuildContext context) {
-    final record =
-        useState<RecordModel>(const RecordModel(result: {}, wodItems: []));
+    final record = ref.watch(recordProvider);
+    // useState<RecordModel>(const RecordModel(result: {}, wodItems: []));
+    final recordNotifier = ref.watch(recordProvider.notifier);
     final theme = Theme.of(context);
     return Scaffold(
       appBar: const CBAppBar(),
@@ -183,7 +186,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                   right: 14,
                   child: IconButton(
                     icon: Icon(Icons.add_circle_outline_rounded),
-                    onPressed: () => _insert(record),
+                    onPressed: () => _insert(),
                   ),
                 ),
               ],
@@ -268,57 +271,14 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   key: _listKey,
-                  initialItemCount: record.value.wodItems.length,
+                  initialItemCount: recordNotifier.state.wodItems.length,
                   itemBuilder: (context, index, anim) {
-                    final wodItem = record.value.wodItems[index];
                     return SizeTransition(
                       sizeFactor: anim,
-                      child: LongPressDraggable<WODItem>(
-                        key: UniqueKey(),
-                        feedback: DragDropCard(
-                          index: index,
-                          record: record,
-                          aniListKey: _listKey,
-                          deleteFunc: setAniList(index, record),
-                        ),
-                        data: wodItem,
-                        child: CBDragTarget<WODItem>(
-                            onAccept: (data, targetData) {
-                              if (identityHashCode(targetData) ==
-                                  identityHashCode(data)) return;
-                              // setState(() {
-                              //   int oldIndex = record.wodItems.indexWhere(
-                              //       (element) => element.key == data.key);
-                              //   wodItems[index] = WODItem(
-                              //       key: UniqueKey(),
-                              //       level: data.level,
-                              //       name: data.name,
-                              //       weight: data.weight,
-                              //       times: data.times);
-                              //   _listKey.currentState!.removeItem(
-                              //     oldIndex,
-                              //     (context, animation) => SizeTransition(
-                              //       sizeFactor: animation,
-                              //       child: DragDropCard(
-                              //         wodItem: data,
-                              //         aniListKey: _listKey,
-                              //         deleteFunc: setAniList(index),
-                              //       ),
-                              //     ),
-                              //   );
-                              //   wodItems.removeWhere(
-                              //       (element) => element.key == data.key);
-                              // });
-                            },
-                            data: wodItem,
-                            builder: (context, a, b) {
-                              return DragDropCard(
-                                index: index,
-                                record: record,
-                                aniListKey: _listKey,
-                                deleteFunc: setAniList(index, record),
-                              );
-                            }),
+                      child: DragDropCard(
+                        aniListKey: _listKey,
+                        index: index,
+                        deleteFunc: setAniList(index),
                       ),
                     );
                   },
@@ -336,7 +296,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
 
                   setState(() {
                     _listKey = GlobalKey();
-                    record.value = const RecordModel(result: {}, wodItems: []);
+                    recordNotifier.clear();
                   });
                 }
               },
@@ -365,9 +325,9 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
     });
   }
 
-  void Function(WODItem) setAniList(
-      int index, ValueNotifier<RecordModel> record) {
+  void Function(WODItem) setAniList(int index) {
     return (WODItem wodItem) {
+      final record = ref.watch(recordProvider);
       ref.watch(recordProvider.notifier).removeWodItem(wodItem);
       setState(() {
         _listKey.currentState!.removeItem(
@@ -376,9 +336,8 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
             sizeFactor: animation,
             child: DragDropCard(
               index: index,
-              record: record,
               aniListKey: _listKey,
-              deleteFunc: setAniList(index, record),
+              deleteFunc: setAniList(index),
             ),
           ),
         );

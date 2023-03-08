@@ -14,24 +14,17 @@ class DragDropCard extends HookConsumerWidget {
       {super.key,
       required this.index,
       required this.aniListKey,
-      required this.record,
       required this.deleteFunc});
   final int index;
   final GlobalKey<AnimatedListState> aniListKey;
   final void Function(WODItem) deleteFunc;
-  final ValueNotifier<RecordModel> record;
-
-  void setWodItem(WODItem wodItem) {
-    record.value = record.value.copyWith(wodItems: [
-      for (final item in record.value.wodItems)
-        if (item.id == wodItem.id) wodItem else item
-    ]);
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
-    final wodItem = record.value.wodItems[index];
+    final record = ref.watch(recordProvider);
+    final recordNotifier = ref.watch(recordProvider.notifier);
+    final wodItem = record.wodItems[index];
     return Container(
       constraints: BoxConstraints(
         minHeight: 132,
@@ -68,7 +61,8 @@ class DragDropCard extends HookConsumerWidget {
                         );
                       }).toList(),
                       onChanged: (Level? value) {
-                        setWodItem(wodItem.copyWith(level: value ?? Level.lv1));
+                        recordNotifier.setWodItem(
+                            wodItem.copyWith(level: value ?? Level.lv1));
                       },
                     ),
                     const SizedBox(width: 12),
@@ -89,7 +83,8 @@ class DragDropCard extends HookConsumerWidget {
                             hintText: "ex) Double Under",
                           ),
                           onChanged: (v) {
-                            setWodItem(wodItem.copyWith(name: v));
+                            recordNotifier
+                                .setWodItem(wodItem.copyWith(name: v));
                           },
                         ),
                       ),
@@ -120,10 +115,7 @@ class DragDropCard extends HookConsumerWidget {
                             suffixText: "lb",
                             suffixStyle: textTheme.bodySmall),
                         onChanged: (v) {
-                          if (v.isNotEmpty) {
-                            setWodItem(
-                                wodItem.copyWith(weight: double.parse(v)));
-                          }
+                          if (v.isNotEmpty) {}
                         },
                       ),
                     ),
@@ -139,9 +131,7 @@ class DragDropCard extends HookConsumerWidget {
                             suffixText: "회",
                             suffixStyle: textTheme.bodySmall),
                         onChanged: (v) {
-                          if (v.isNotEmpty) {
-                            setWodItem(wodItem.copyWith(reps: int.parse(v)));
-                          }
+                          if (v.isNotEmpty) {}
                         },
                       ),
                     ),
@@ -157,9 +147,7 @@ class DragDropCard extends HookConsumerWidget {
                             suffixText: "cal",
                             suffixStyle: textTheme.bodySmall),
                         onChanged: (v) {
-                          if (v.isNotEmpty) {
-                            setWodItem(wodItem.copyWith(cal: int.parse(v)));
-                          }
+                          if (v.isNotEmpty) {}
                         },
                       ),
                     ),
@@ -175,10 +163,7 @@ class DragDropCard extends HookConsumerWidget {
                             suffixText: "m",
                             suffixStyle: textTheme.bodySmall),
                         onChanged: (v) {
-                          if (v.isNotEmpty) {
-                            setWodItem(
-                                wodItem.copyWith(distance: int.parse(v)));
-                          }
+                          if (v.isNotEmpty) {}
                         },
                       ),
                     ),
