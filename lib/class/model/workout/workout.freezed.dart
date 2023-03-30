@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'wod.dart';
+part of 'workout.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-WODItem _$WODItemFromJson(Map<String, dynamic> json) {
-  return _WODItem.fromJson(json);
+Workout _$WorkoutFromJson(Map<String, dynamic> json) {
+  return _Workout.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WODItem {
+mixin _$Workout {
   String get id => throw _privateConstructorUsedError;
   Level get level => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -30,13 +30,13 @@ mixin _$WODItem {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WODItemCopyWith<WODItem> get copyWith => throw _privateConstructorUsedError;
+  $WorkoutCopyWith<Workout> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WODItemCopyWith<$Res> {
-  factory $WODItemCopyWith(WODItem value, $Res Function(WODItem) then) =
-      _$WODItemCopyWithImpl<$Res, WODItem>;
+abstract class $WorkoutCopyWith<$Res> {
+  factory $WorkoutCopyWith(Workout value, $Res Function(Workout) then) =
+      _$WorkoutCopyWithImpl<$Res, Workout>;
   @useResult
   $Res call(
       {String id,
@@ -49,9 +49,9 @@ abstract class $WODItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$WODItemCopyWithImpl<$Res, $Val extends WODItem>
-    implements $WODItemCopyWith<$Res> {
-  _$WODItemCopyWithImpl(this._value, this._then);
+class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
+    implements $WorkoutCopyWith<$Res> {
+  _$WorkoutCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -103,10 +103,10 @@ class _$WODItemCopyWithImpl<$Res, $Val extends WODItem>
 }
 
 /// @nodoc
-abstract class _$$_WODItemCopyWith<$Res> implements $WODItemCopyWith<$Res> {
-  factory _$$_WODItemCopyWith(
-          _$_WODItem value, $Res Function(_$_WODItem) then) =
-      __$$_WODItemCopyWithImpl<$Res>;
+abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
+  factory _$$_WorkoutCopyWith(
+          _$_Workout value, $Res Function(_$_Workout) then) =
+      __$$_WorkoutCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -120,10 +120,10 @@ abstract class _$$_WODItemCopyWith<$Res> implements $WODItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_WODItemCopyWithImpl<$Res>
-    extends _$WODItemCopyWithImpl<$Res, _$_WODItem>
-    implements _$$_WODItemCopyWith<$Res> {
-  __$$_WODItemCopyWithImpl(_$_WODItem _value, $Res Function(_$_WODItem) _then)
+class __$$_WorkoutCopyWithImpl<$Res>
+    extends _$WorkoutCopyWithImpl<$Res, _$_Workout>
+    implements _$$_WorkoutCopyWith<$Res> {
+  __$$_WorkoutCopyWithImpl(_$_Workout _value, $Res Function(_$_Workout) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,7 +137,7 @@ class __$$_WODItemCopyWithImpl<$Res>
     Object? distance = null,
     Object? reps = null,
   }) {
-    return _then(_$_WODItem(
+    return _then(_$_Workout(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -172,8 +172,8 @@ class __$$_WODItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_WODItem implements _WODItem {
-  const _$_WODItem(
+class _$_Workout implements _Workout {
+  const _$_Workout(
       {required this.id,
       required this.level,
       required this.name,
@@ -182,8 +182,8 @@ class _$_WODItem implements _WODItem {
       required this.distance,
       required this.reps});
 
-  factory _$_WODItem.fromJson(Map<String, dynamic> json) =>
-      _$$_WODItemFromJson(json);
+  factory _$_Workout.fromJson(Map<String, dynamic> json) =>
+      _$$_WorkoutFromJson(json);
 
   @override
   final String id;
@@ -202,14 +202,14 @@ class _$_WODItem implements _WODItem {
 
   @override
   String toString() {
-    return 'WODItem(id: $id, level: $level, name: $name, weight: $weight, cal: $cal, distance: $distance, reps: $reps)';
+    return 'Workout(id: $id, level: $level, name: $name, weight: $weight, cal: $cal, distance: $distance, reps: $reps)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WODItem &&
+            other is _$_Workout &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.name, name) || other.name == name) &&
@@ -228,28 +228,28 @@ class _$_WODItem implements _WODItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WODItemCopyWith<_$_WODItem> get copyWith =>
-      __$$_WODItemCopyWithImpl<_$_WODItem>(this, _$identity);
+  _$$_WorkoutCopyWith<_$_Workout> get copyWith =>
+      __$$_WorkoutCopyWithImpl<_$_Workout>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WODItemToJson(
+    return _$$_WorkoutToJson(
       this,
     );
   }
 }
 
-abstract class _WODItem implements WODItem {
-  const factory _WODItem(
+abstract class _Workout implements Workout {
+  const factory _Workout(
       {required final String id,
       required final Level level,
       required final String name,
       required final double weight,
       required final int cal,
       required final int distance,
-      required final int reps}) = _$_WODItem;
+      required final int reps}) = _$_Workout;
 
-  factory _WODItem.fromJson(Map<String, dynamic> json) = _$_WODItem.fromJson;
+  factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
 
   @override
   String get id;
@@ -267,6 +267,6 @@ abstract class _WODItem implements WODItem {
   int get reps;
   @override
   @JsonKey(ignore: true)
-  _$$_WODItemCopyWith<_$_WODItem> get copyWith =>
+  _$$_WorkoutCopyWith<_$_Workout> get copyWith =>
       throw _privateConstructorUsedError;
 }

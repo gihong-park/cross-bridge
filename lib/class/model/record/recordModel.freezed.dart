@@ -21,7 +21,8 @@ RecordModel _$RecordModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RecordModel {
   Map<String, int> get result => throw _privateConstructorUsedError;
-  List<WODItem> get wodItems => throw _privateConstructorUsedError;
+  bool get isWOD => throw _privateConstructorUsedError;
+  List<Workout> get workouts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $RecordModelCopyWith<$Res> {
           RecordModel value, $Res Function(RecordModel) then) =
       _$RecordModelCopyWithImpl<$Res, RecordModel>;
   @useResult
-  $Res call({Map<String, int> result, List<WODItem> wodItems});
+  $Res call({Map<String, int> result, bool isWOD, List<Workout> workouts});
 }
 
 /// @nodoc
@@ -52,17 +53,22 @@ class _$RecordModelCopyWithImpl<$Res, $Val extends RecordModel>
   @override
   $Res call({
     Object? result = null,
-    Object? wodItems = null,
+    Object? isWOD = null,
+    Object? workouts = null,
   }) {
     return _then(_value.copyWith(
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
-      wodItems: null == wodItems
-          ? _value.wodItems
-          : wodItems // ignore: cast_nullable_to_non_nullable
-              as List<WODItem>,
+      isWOD: null == isWOD
+          ? _value.isWOD
+          : isWOD // ignore: cast_nullable_to_non_nullable
+              as bool,
+      workouts: null == workouts
+          ? _value.workouts
+          : workouts // ignore: cast_nullable_to_non_nullable
+              as List<Workout>,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$_RecordModelCopyWith<$Res>
       __$$_RecordModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, int> result, List<WODItem> wodItems});
+  $Res call({Map<String, int> result, bool isWOD, List<Workout> workouts});
 }
 
 /// @nodoc
@@ -90,17 +96,22 @@ class __$$_RecordModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? result = null,
-    Object? wodItems = null,
+    Object? isWOD = null,
+    Object? workouts = null,
   }) {
     return _then(_$_RecordModel(
       result: null == result
           ? _value._result
           : result // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
-      wodItems: null == wodItems
-          ? _value._wodItems
-          : wodItems // ignore: cast_nullable_to_non_nullable
-              as List<WODItem>,
+      isWOD: null == isWOD
+          ? _value.isWOD
+          : isWOD // ignore: cast_nullable_to_non_nullable
+              as bool,
+      workouts: null == workouts
+          ? _value._workouts
+          : workouts // ignore: cast_nullable_to_non_nullable
+              as List<Workout>,
     ));
   }
 }
@@ -110,9 +121,10 @@ class __$$_RecordModelCopyWithImpl<$Res>
 class _$_RecordModel implements _RecordModel {
   const _$_RecordModel(
       {required final Map<String, int> result,
-      required final List<WODItem> wodItems})
+      required this.isWOD,
+      required final List<Workout> workouts})
       : _result = result,
-        _wodItems = wodItems;
+        _workouts = workouts;
 
   factory _$_RecordModel.fromJson(Map<String, dynamic> json) =>
       _$$_RecordModelFromJson(json);
@@ -124,16 +136,18 @@ class _$_RecordModel implements _RecordModel {
     return EqualUnmodifiableMapView(_result);
   }
 
-  final List<WODItem> _wodItems;
   @override
-  List<WODItem> get wodItems {
+  final bool isWOD;
+  final List<Workout> _workouts;
+  @override
+  List<Workout> get workouts {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_wodItems);
+    return EqualUnmodifiableListView(_workouts);
   }
 
   @override
   String toString() {
-    return 'RecordModel(result: $result, wodItems: $wodItems)';
+    return 'RecordModel(result: $result, isWOD: $isWOD, workouts: $workouts)';
   }
 
   @override
@@ -142,7 +156,8 @@ class _$_RecordModel implements _RecordModel {
         (other.runtimeType == runtimeType &&
             other is _$_RecordModel &&
             const DeepCollectionEquality().equals(other._result, _result) &&
-            const DeepCollectionEquality().equals(other._wodItems, _wodItems));
+            (identical(other.isWOD, isWOD) || other.isWOD == isWOD) &&
+            const DeepCollectionEquality().equals(other._workouts, _workouts));
   }
 
   @JsonKey(ignore: true)
@@ -150,7 +165,8 @@ class _$_RecordModel implements _RecordModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_result),
-      const DeepCollectionEquality().hash(_wodItems));
+      isWOD,
+      const DeepCollectionEquality().hash(_workouts));
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +185,8 @@ class _$_RecordModel implements _RecordModel {
 abstract class _RecordModel implements RecordModel {
   const factory _RecordModel(
       {required final Map<String, int> result,
-      required final List<WODItem> wodItems}) = _$_RecordModel;
+      required final bool isWOD,
+      required final List<Workout> workouts}) = _$_RecordModel;
 
   factory _RecordModel.fromJson(Map<String, dynamic> json) =
       _$_RecordModel.fromJson;
@@ -177,7 +194,9 @@ abstract class _RecordModel implements RecordModel {
   @override
   Map<String, int> get result;
   @override
-  List<WODItem> get wodItems;
+  bool get isWOD;
+  @override
+  List<Workout> get workouts;
   @override
   @JsonKey(ignore: true)
   _$$_RecordModelCopyWith<_$_RecordModel> get copyWith =>

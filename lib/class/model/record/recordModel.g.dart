@@ -9,13 +9,15 @@ part of 'recordModel.dart';
 _$_RecordModel _$$_RecordModelFromJson(Map<String, dynamic> json) =>
     _$_RecordModel(
       result: Map<String, int>.from(json['result'] as Map),
-      wodItems: (json['wodItems'] as List<dynamic>)
-          .map((e) => WODItem.fromJson(e as Map<String, dynamic>))
+      isWOD: json['isWOD'] as bool,
+      workouts: (json['workouts'] as List<dynamic>)
+          .map((e) => Workout.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$_RecordModelToJson(_$_RecordModel instance) =>
     <String, dynamic>{
       'result': instance.result,
-      'wodItems': instance.wodItems,
+      'isWOD': instance.isWOD,
+      'workouts': instance.workouts,
     };

@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../class/const.dart';
 import '../../class/enum.dart';
-import '../../class/model/wod/wod.dart';
+import '../../class/model/workout/workout.dart';
 
 class DragDropCard extends HookConsumerWidget {
   const DragDropCard(
@@ -17,14 +17,14 @@ class DragDropCard extends HookConsumerWidget {
       required this.deleteFunc});
   final int index;
   final GlobalKey<AnimatedListState> aniListKey;
-  final void Function(WODItem) deleteFunc;
+  final void Function(Workout) deleteFunc;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final record = ref.watch(recordProvider);
     final recordNotifier = ref.watch(recordProvider.notifier);
-    final wodItem = record.wodItems[index];
+    final workout = record.workouts[index];
     return Container(
       constraints: BoxConstraints(
         minHeight: 132,
@@ -52,7 +52,7 @@ class DragDropCard extends HookConsumerWidget {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     DropdownButton<Level>(
-                      value: wodItem.level,
+                      value: workout.level,
                       style: Theme.of(context).textTheme.labelMedium,
                       items: lvList.map<DropdownMenuItem<Level>>((Level value) {
                         return DropdownMenuItem<Level>(
@@ -62,7 +62,7 @@ class DragDropCard extends HookConsumerWidget {
                       }).toList(),
                       onChanged: (Level? value) {
                         recordNotifier.setWodItem(
-                            wodItem.copyWith(level: value ?? Level.lv1));
+                            workout.copyWith(level: value ?? Level.lv1));
                       },
                     ),
                     const SizedBox(width: 12),
@@ -73,7 +73,7 @@ class DragDropCard extends HookConsumerWidget {
                         height: 36,
                         padding: const EdgeInsets.only(top: 6),
                         child: TextFormField(
-                          initialValue: wodItem.name,
+                          initialValue: workout.name,
                           style: textTheme.bodySmall,
                           maxLines: 1,
                           decoration: const InputDecoration(
@@ -84,7 +84,7 @@ class DragDropCard extends HookConsumerWidget {
                           ),
                           onChanged: (v) {
                             recordNotifier
-                                .setWodItem(wodItem.copyWith(name: v));
+                                .setWodItem(workout.copyWith(name: v));
                           },
                         ),
                       ),
@@ -94,7 +94,7 @@ class DragDropCard extends HookConsumerWidget {
                       padding: EdgeInsets.zero,
                       icon: const Icon(Icons.cancel_outlined),
                       onPressed: () {
-                        deleteFunc(wodItem);
+                        deleteFunc(workout);
                       },
                     ),
                   ],

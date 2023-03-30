@@ -1,6 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+ThemeData darkTheme = ThemeData(
+  useMaterial3: true,
+  colorScheme: const ColorScheme(
+    primary: Color(0xfff3af20),
+    brightness: Brightness.dark,
+    onPrimary: Colors.black,
+    secondary: Colors.black,
+    onSecondary: Colors.white,
+    secondaryContainer: Color(0xFF8F8F8F),
+    onSecondaryContainer: Colors.black,
+    error: Color(0xFFF90912),
+    onError: Colors.black,
+    background: Color(0xFF1A191E),
+    onBackground: Colors.white,
+    surface: Color(0xFF202327),
+    onSurface: Colors.white,
+  ),
+  textTheme: GoogleFonts.aBeeZeeTextTheme(),
+  fontFamily: GoogleFonts.aBeeZee().fontFamily,
+  inputDecorationTheme: const InputDecorationTheme(
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Color(0xFF8F8F8F), width: 1.0),
+    ),
+    labelStyle: TextStyle(color: Color(0xFF8F8F8F)),
+    floatingLabelStyle: TextStyle(color: Color(0xfff3af20)),
+  ),
+);
+
 ThemeData themeData = ThemeData(
   useMaterial3: true,
   // primarySwatch: createMaterialColor(Colors.white),

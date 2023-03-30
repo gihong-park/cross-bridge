@@ -1,5 +1,6 @@
 import 'package:_04_health_check/class/const.dart';
 import 'package:_04_health_check/pages/homePage/homePage.dart';
+import 'package:_04_health_check/pages/introPage/introPage.dart';
 import 'package:_04_health_check/pages/loginPage/loginPage.dart';
 import 'package:_04_health_check/styles.dart';
 import 'package:_04_health_check/util/logger.dart';
@@ -38,12 +39,13 @@ class HealthCheckApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterWebFrame(
       builder: (context) => MaterialApp(
-        title: 'Training Bridge',
-        theme: themeData,
-        initialRoute: '/login',
+        title: 'cross buddy',
+        theme: darkTheme,
+        initialRoute: '/intro',
         routes: {
           '/': (context) => const HomePage(),
-          '/login': (context) => const LoginPage()
+          '/login': (context) => const LoginPage(),
+          '/intro': (context) => const IntroPage(),
         },
       ),
       maximumSize: maxSize,

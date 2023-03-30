@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wod.dart';
+part of 'workout.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_WODItem _$$_WODItemFromJson(Map<String, dynamic> json) => _$_WODItem(
+_$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
       id: json['id'] as String,
       level: $enumDecode(_$LevelEnumMap, json['level']),
       name: json['name'] as String,
@@ -16,7 +16,7 @@ _$_WODItem _$$_WODItemFromJson(Map<String, dynamic> json) => _$_WODItem(
       reps: json['reps'] as int,
     );
 
-Map<String, dynamic> _$$_WODItemToJson(_$_WODItem instance) =>
+Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
     <String, dynamic>{
       'id': instance.id,
       'level': _$LevelEnumMap[instance.level]!,

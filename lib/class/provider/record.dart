@@ -1,4 +1,4 @@
-import 'package:_04_health_check/class/model/wod/wod.dart';
+import 'package:_04_health_check/class/model/workout/workout.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,16 +9,20 @@ part 'record.g.dart';
 class Record extends _$Record {
   @override
   RecordModel build() {
-    return const RecordModel(result: {}, wodItems: []);
+    return const RecordModel(result: {}, workouts: [], isWOD: false);
   }
 
-  void addWodItem(WODItem wodItem) {
-    state = state.copyWith(wodItems: [...state.wodItems, wodItem]);
+  void toggleWOD(bool isWOD) {
+    state = state.copyWith(isWOD: isWOD);
   }
 
-  void setWodItem(WODItem editedItem) {
-    state = state.copyWith(wodItems: [
-      for (final item in state.wodItems)
+  void addWodItem(Workout wodItem) {
+    state = state.copyWith(workouts: [...state.workouts, wodItem]);
+  }
+
+  void setWodItem(Workout editedItem) {
+    state = state.copyWith(workouts: [
+      for (final item in state.workouts)
         if (item.id == editedItem.id)
           item.copyWith(
               level: editedItem.level,
@@ -32,16 +36,16 @@ class Record extends _$Record {
     ]);
   }
 
-  void removeWodItem(WODItem wodItem) {
+  void removeWodItem(Workout wodItem) {
     state = state.copyWith(
-      wodItems: [
-        ...state.wodItems.where((element) => element.id != wodItem.id)
+      workouts: [
+        ...state.workouts.where((element) => element.id != wodItem.id)
       ],
     );
   }
 
   void clear() {
-    state = const RecordModel(result: {}, wodItems: []);
+    state = const RecordModel(result: {}, workouts: [], isWOD: false);
   }
 
   void addResult(String key, int value) {

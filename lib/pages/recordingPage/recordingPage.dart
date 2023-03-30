@@ -1,18 +1,15 @@
 import 'package:_04_health_check/class/enum.dart';
 import 'package:_04_health_check/class/extension.dart';
-import 'package:_04_health_check/class/model/record/recordModel.dart';
-import 'package:_04_health_check/class/model/wod/wod.dart';
+import 'package:_04_health_check/class/model/workout/workout.dart';
 import 'package:_04_health_check/class/provider/record.dart';
 import 'package:_04_health_check/util/util.dart';
 import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../class/const.dart';
-import '../../widgets/CBDragTarget/cbDragTarget.dart';
 import '../../widgets/dragDropCard/dragDropCard.dart';
 
 class RecordingPage extends StatefulHookConsumerWidget {
@@ -31,7 +28,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
   Set<String> results = {};
 
   void _insert() {
-    final wodItem = WODItem(
+    final wodItem = Workout(
         id: uuid.v4(),
         level: Level.lv1,
         name: "",
@@ -39,18 +36,15 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
         reps: 0,
         cal: 0,
         distance: 0);
-    // record.value =
-    //     record.value.copyWith(wodItems: [...record.value.wodItems, wodItem]);
     final record = ref.watch(recordProvider);
     ref.watch(recordProvider.notifier).addWodItem(wodItem);
-    _listKey.currentState!.insertItem(record.wodItems.length);
+    _listKey.currentState!.insertItem(record.workouts.length);
   }
 
   @override
   Widget build(BuildContext context) {
-    final record = ref.watch(recordProvider);
-    // useState<RecordModel>(const RecordModel(result: {}, wodItems: []));
     final recordNotifier = ref.watch(recordProvider.notifier);
+    final record = ref.watch(recordProvider);
     final theme = Theme.of(context);
     return Scaffold(
       appBar: const CBAppBar(),
@@ -59,7 +53,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
             horizontal: horizontalPadding, vertical: 12),
         children: [
           Container(
-            constraints: BoxConstraints(minHeight: 120),
+            constraints: const BoxConstraints(minHeight: 120),
             decoration: BoxDecoration(
               border: Border.all(width: 2),
               borderRadius: BorderRadius.circular(14),
@@ -78,25 +72,66 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text("Date",
-                              style: theme.textTheme.bodyMedium
-                                  ?.copyWith(fontWeight: FontWeight.w700)),
-                          TextButton(
-                            child: Text(dateFormat.format(selectedDate),
-                                style: theme.textTheme.bodyMedium),
-                            onPressed: () {
-                              showDatePickerPop(context);
-                            },
-                            style: TextButtonTheme.of(context).style?.copyWith(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      theme.colorScheme.background),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("Date",
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700)),
+                                    InkWell(
+                                      onTap: () {
+                                        showDatePickerPop(context);
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Text(
+                                            dateFormat.format(selectedDate),
+                                            style: theme.textTheme.bodyMedium),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                          ),
-                        ],
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "WOD",
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                      height: 26,
+                                      child: Checkbox(
+                                          side: MaterialStateBorderSide
+                                              .resolveWith(
+                                            (states) => BorderSide(
+                                                width: 2.0,
+                                                color: Colors.black),
+                                          ),
+                                          value: record.isWOD,
+                                          onChanged: (value) => recordNotifier
+                                              .toggleWOD(value ?? false)),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +141,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                             style: theme.textTheme.bodyMedium
                                 ?.copyWith(fontWeight: FontWeight.w700),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 12,
                           ),
                           Container(
@@ -120,7 +155,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                                 ...results
                                     .map(
                                       (rst) => ActionChip(
-                                        avatar: Icon(
+                                        avatar: const Icon(
                                           Icons.cancel_outlined,
                                           color: Colors.black,
                                         ),
@@ -156,7 +191,8 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                                           fullwidth: false,
                                           style: theme.textTheme.labelLarge,
                                           decoration: InputDecoration.collapsed(
-                                            border: UnderlineInputBorder(),
+                                            border:
+                                                const UnderlineInputBorder(),
                                             hintStyle: theme
                                                 .textTheme.labelMedium
                                                 ?.copyWith(color: Colors.grey),
@@ -185,14 +221,14 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                   bottom: 0,
                   right: 14,
                   child: IconButton(
-                    icon: Icon(Icons.add_circle_outline_rounded),
+                    icon: const Icon(Icons.add_circle_outline_rounded),
                     onPressed: () => _insert(),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Form(
@@ -271,7 +307,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   key: _listKey,
-                  initialItemCount: recordNotifier.state.wodItems.length,
+                  initialItemCount: record.workouts.length,
                   itemBuilder: (context, index, anim) {
                     return SizeTransition(
                       sizeFactor: anim,
@@ -289,7 +325,7 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
           SizedBox(
             width: double.infinity,
             child: TextButton(
-              child: Text("Submit"),
+              child: const Text("Submit"),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
@@ -325,9 +361,8 @@ class _RecordingPageState extends ConsumerState<RecordingPage> {
     });
   }
 
-  void Function(WODItem) setAniList(int index) {
-    return (WODItem wodItem) {
-      final record = ref.watch(recordProvider);
+  void Function(Workout) setAniList(int index) {
+    return (Workout wodItem) {
       ref.watch(recordProvider.notifier).removeWodItem(wodItem);
       setState(() {
         _listKey.currentState!.removeItem(
