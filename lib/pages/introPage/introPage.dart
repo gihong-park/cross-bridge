@@ -83,7 +83,7 @@ class _IntroPageState extends ConsumerState<IntroPage> {
                   borderRadius: BorderRadius.circular(50),
                   child: Container(
                     width: size.height / 6,
-                    height: size.height / 25,
+                    height: size.height / 24,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       image: DecorationImage(
