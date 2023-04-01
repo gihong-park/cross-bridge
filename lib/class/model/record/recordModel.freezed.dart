@@ -22,6 +22,7 @@ RecordModel _$RecordModelFromJson(Map<String, dynamic> json) {
 mixin _$RecordModel {
   Map<String, int> get result => throw _privateConstructorUsedError;
   bool get isWOD => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   List<Workout> get workouts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +37,11 @@ abstract class $RecordModelCopyWith<$Res> {
           RecordModel value, $Res Function(RecordModel) then) =
       _$RecordModelCopyWithImpl<$Res, RecordModel>;
   @useResult
-  $Res call({Map<String, int> result, bool isWOD, List<Workout> workouts});
+  $Res call(
+      {Map<String, int> result,
+      bool isWOD,
+      DateTime date,
+      List<Workout> workouts});
 }
 
 /// @nodoc
@@ -54,6 +59,7 @@ class _$RecordModelCopyWithImpl<$Res, $Val extends RecordModel>
   $Res call({
     Object? result = null,
     Object? isWOD = null,
+    Object? date = null,
     Object? workouts = null,
   }) {
     return _then(_value.copyWith(
@@ -65,6 +71,10 @@ class _$RecordModelCopyWithImpl<$Res, $Val extends RecordModel>
           ? _value.isWOD
           : isWOD // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       workouts: null == workouts
           ? _value.workouts
           : workouts // ignore: cast_nullable_to_non_nullable
@@ -81,7 +91,11 @@ abstract class _$$_RecordModelCopyWith<$Res>
       __$$_RecordModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Map<String, int> result, bool isWOD, List<Workout> workouts});
+  $Res call(
+      {Map<String, int> result,
+      bool isWOD,
+      DateTime date,
+      List<Workout> workouts});
 }
 
 /// @nodoc
@@ -97,6 +111,7 @@ class __$$_RecordModelCopyWithImpl<$Res>
   $Res call({
     Object? result = null,
     Object? isWOD = null,
+    Object? date = null,
     Object? workouts = null,
   }) {
     return _then(_$_RecordModel(
@@ -108,6 +123,10 @@ class __$$_RecordModelCopyWithImpl<$Res>
           ? _value.isWOD
           : isWOD // ignore: cast_nullable_to_non_nullable
               as bool,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       workouts: null == workouts
           ? _value._workouts
           : workouts // ignore: cast_nullable_to_non_nullable
@@ -122,6 +141,7 @@ class _$_RecordModel implements _RecordModel {
   const _$_RecordModel(
       {required final Map<String, int> result,
       required this.isWOD,
+      required this.date,
       required final List<Workout> workouts})
       : _result = result,
         _workouts = workouts;
@@ -138,6 +158,8 @@ class _$_RecordModel implements _RecordModel {
 
   @override
   final bool isWOD;
+  @override
+  final DateTime date;
   final List<Workout> _workouts;
   @override
   List<Workout> get workouts {
@@ -147,7 +169,7 @@ class _$_RecordModel implements _RecordModel {
 
   @override
   String toString() {
-    return 'RecordModel(result: $result, isWOD: $isWOD, workouts: $workouts)';
+    return 'RecordModel(result: $result, isWOD: $isWOD, date: $date, workouts: $workouts)';
   }
 
   @override
@@ -157,6 +179,7 @@ class _$_RecordModel implements _RecordModel {
             other is _$_RecordModel &&
             const DeepCollectionEquality().equals(other._result, _result) &&
             (identical(other.isWOD, isWOD) || other.isWOD == isWOD) &&
+            (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._workouts, _workouts));
   }
 
@@ -166,6 +189,7 @@ class _$_RecordModel implements _RecordModel {
       runtimeType,
       const DeepCollectionEquality().hash(_result),
       isWOD,
+      date,
       const DeepCollectionEquality().hash(_workouts));
 
   @JsonKey(ignore: true)
@@ -186,6 +210,7 @@ abstract class _RecordModel implements RecordModel {
   const factory _RecordModel(
       {required final Map<String, int> result,
       required final bool isWOD,
+      required final DateTime date,
       required final List<Workout> workouts}) = _$_RecordModel;
 
   factory _RecordModel.fromJson(Map<String, dynamic> json) =
@@ -195,6 +220,8 @@ abstract class _RecordModel implements RecordModel {
   Map<String, int> get result;
   @override
   bool get isWOD;
+  @override
+  DateTime get date;
   @override
   List<Workout> get workouts;
   @override

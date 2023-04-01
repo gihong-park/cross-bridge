@@ -9,7 +9,8 @@ part 'record.g.dart';
 class Record extends _$Record {
   @override
   RecordModel build() {
-    return const RecordModel(result: {}, workouts: [], isWOD: false);
+    return RecordModel(
+        result: {}, workouts: [], isWOD: false, date: DateTime.now());
   }
 
   void toggleWOD(bool isWOD) {
@@ -45,7 +46,8 @@ class Record extends _$Record {
   }
 
   void clear() {
-    state = const RecordModel(result: {}, workouts: [], isWOD: false);
+    state = RecordModel(
+        result: {}, workouts: [], isWOD: false, date: DateTime.now());
   }
 
   void addResult(String key, int value) {

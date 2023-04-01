@@ -159,27 +159,19 @@ Level 1: 95/65 Ibs or 1RM Power Clean 55%
                 onTap: () => debugPrint("pressed"),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "TIMER / RECODER",
-                            style: TextStyle(
-                                fontSize: 24, color: colorScheme.onSurface),
-                          ),
-                          Text(
-                            "Record Your Workout",
-                            style: TextStyle(
-                                fontSize: 16, color: colorScheme.onSurface),
-                          ),
-                        ],
+                      Text(
+                        "TIMER / RECODER",
+                        style: TextStyle(
+                            fontSize: 24, color: colorScheme.onSurface),
                       ),
-                      Icon(Icons.chevron_right_sharp,
-                          size: 42, color: colorScheme.secondaryContainer),
+                      Text(
+                        "Record Your Workout",
+                        style: TextStyle(
+                            fontSize: 16, color: colorScheme.onSurface),
+                      ),
                     ],
                   ),
                 ),
@@ -200,33 +192,26 @@ Level 1: 95/65 Ibs or 1RM Power Clean 55%
                 onTap: () => debugPrint("pressed"),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "LEADERBOARD",
-                            style: TextStyle(
-                                fontSize: 24, color: colorScheme.onSurface),
-                          ),
-                          Text(
-                            "Come and See Others WOD Record",
-                            style: TextStyle(
-                                fontSize: 16, color: colorScheme.onSurface),
-                          ),
-                        ],
+                      Text(
+                        "LEADERBOARD",
+                        style: TextStyle(
+                            fontSize: 24, color: colorScheme.onSurface),
                       ),
-                      Icon(Icons.chevron_right_sharp,
-                          size: 42, color: colorScheme.secondaryContainer),
+                      Text(
+                        "Come and See Others WOD Record",
+                        style: TextStyle(
+                            fontSize: 16, color: colorScheme.onSurface),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
+          SizedBox(height: 24),
         ],
       ),
     );
@@ -263,13 +248,22 @@ class Weekday extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final week = DateFormat('EEE').format(date);
     final day = DateFormat('dd').format(date);
-    return Column(
-      children: [
-        Text(week, style: TextStyle(color: setColor(state), fontSize: 16)),
-        Text(day, style: TextStyle(color: setColor(state), fontSize: 16)),
-      ],
+    return Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: state == State.activate
+              ? colorScheme.surface
+              : colorScheme.background),
+      child: Column(
+        children: [
+          Text(week, style: TextStyle(color: setColor(state), fontSize: 16)),
+          Text(day, style: TextStyle(color: setColor(state), fontSize: 16)),
+        ],
+      ),
     );
   }
 

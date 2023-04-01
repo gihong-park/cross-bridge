@@ -86,12 +86,8 @@ class _ConfirmPageState extends ConsumerState<ConfirmPage> {
                     height: 18,
                   ),
                   CBButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DashboardPage(),
-                      ),
-                    ),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (route) => false),
                     child: Text(
                       "Let's Started",
                       style: TextStyle(fontSize: 20),

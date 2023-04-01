@@ -44,7 +44,6 @@ class HealthCheckApp extends StatelessWidget {
         initialRoute: '/intro',
         routes: {
           '/': (context) => const HomePage(),
-          '/login': (context) => const LoginPage(),
           '/intro': (context) => const IntroPage(),
         },
       ),

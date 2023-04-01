@@ -18,6 +18,7 @@ ThemeData darkTheme = ThemeData(
     surface: Color(0xFF202327),
     onSurface: Colors.white,
   ),
+  appBarTheme: AppBarTheme(color: Color(0xFF202327), scrolledUnderElevation: 0),
   textTheme: GoogleFonts.aBeeZeeTextTheme(),
   fontFamily: GoogleFonts.aBeeZee().fontFamily,
   inputDecorationTheme: const InputDecorationTheme(

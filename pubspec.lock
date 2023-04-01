@@ -965,6 +965,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  suggester:
+    dependency: "direct main"
+    description:
+      name: suggester
+      sha256: "6db10d3e308749937fd1c93a9285ba3a09bc57a77cfaa04e37ae8771eb3d4504"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.7"
   term_glyph:
     dependency: transitive
     description:
@@ -973,6 +981,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  ternarytreap:
+    dependency: transitive
+    description:
+      name: ternarytreap
+      sha256: "2839417bec577ed17b6e26f9e03d00a213ef00687cfbe0cb5a1c6942a9553507"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   test_api:
     dependency: transitive
     description:

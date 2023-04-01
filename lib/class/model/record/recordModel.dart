@@ -9,6 +9,7 @@ class RecordModel with _$RecordModel {
   const factory RecordModel(
       {required Map<String, int> result,
       required bool isWOD,
+      required DateTime date,
       required List<Workout> workouts}) = _RecordModel;
   factory RecordModel.fromJson(Map<String, dynamic> json) =>
       _$RecordModelFromJson(json);
