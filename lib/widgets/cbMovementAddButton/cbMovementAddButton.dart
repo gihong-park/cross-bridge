@@ -1,3 +1,4 @@
+import 'package:_04_health_check/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -27,10 +28,14 @@ class _CBMovementAddButtonState extends ConsumerState<CBMovementAddButton> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Add Movement",
-                  style: TextStyle(color: colorScheme.primary, fontSize: 16)),
+                  style: TextStyle(
+                      color: enableColor(widget.enabled, colorScheme.primary,
+                          colorScheme.tertiary),
+                      fontSize: 16)),
               Icon(
                 Icons.add_circle_outline,
-                color: colorScheme.primary,
+                color: enableColor(
+                    widget.enabled, colorScheme.primary, colorScheme.tertiary),
                 size: 26,
               ),
             ],

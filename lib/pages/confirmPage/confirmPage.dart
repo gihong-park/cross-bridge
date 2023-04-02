@@ -60,7 +60,7 @@ class _ConfirmPageState extends ConsumerState<ConfirmPage> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            labelText: "Age",
+                            labelText: "BirthDay",
                           ),
                         ),
                         TextFormField(

@@ -1,5 +1,6 @@
 import 'package:_04_health_check/class/model/movement/movement.dart';
 import 'package:_04_health_check/class/provider/suggester.dart';
+import 'package:_04_health_check/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -120,7 +121,9 @@ class _MovementCardState extends ConsumerState<MovementCard> {
             child: IconButton(
               padding: EdgeInsets.zero,
               icon: Icon(Icons.do_disturb_on_outlined,
-                  color: colorScheme.error, size: 32),
+                  color: enableColor(
+                      widget.enabled, colorScheme.error, colorScheme.tertiary),
+                  size: 32),
               onPressed: widget.enabled
                   ? () => widget.onDelete?.call(widget.movement)
                   : null,

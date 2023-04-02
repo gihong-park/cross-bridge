@@ -1,16 +1,10 @@
 import 'dart:developer';
 
-import 'package:_04_health_check/class/const.dart';
 import 'package:_04_health_check/pages/dashboardPage/dashboardPage.dart';
+import 'package:_04_health_check/pages/introPage/introPage.dart';
 import 'package:_04_health_check/pages/recordPage/recordPage.dart';
-import 'package:_04_health_check/pages/testPage/testPage.dart';
-import 'package:_04_health_check/widgets/footer/footer.dart';
-import 'package:_04_health_check/widgets/cbAppBar/cbAppBar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends StatefulHookConsumerWidget {
@@ -28,16 +22,17 @@ class _HomePageState extends ConsumerState<HomePage> {
       RecordPage(),
       DashboardPage(),
     ];
-    final _selectedIdx = useState(0);
     final colorScheme = Theme.of(context).colorScheme;
+    final page = ref.watch(pageProvider);
+    final pageNotifier = ref.watch(pageProvider.notifier);
     return Scaffold(
-      body: pages[_selectedIdx.value],
+      body: pages[page],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: colorScheme.surface,
-        currentIndex: _selectedIdx.value,
+        currentIndex: page,
         selectedItemColor: colorScheme.primary,
         unselectedItemColor: colorScheme.secondaryContainer,
-        onTap: (idx) => _selectedIdx.value = idx,
+        onTap: (idx) => pageNotifier.state = idx,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.edit), label: "Record"),

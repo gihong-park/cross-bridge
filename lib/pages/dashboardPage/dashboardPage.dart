@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:_04_health_check/pages/introPage/introPage.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -156,7 +159,10 @@ Level 1: 95/65 Ibs or 1RM Power Clean 55%
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
-                onTap: () => debugPrint("pressed"),
+                onTap: () {
+                  Timer(const Duration(milliseconds: 200),
+                      () => ref.watch(pageProvider.notifier).state = 1);
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Column(

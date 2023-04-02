@@ -38,12 +38,15 @@ class _RecordPageState extends ConsumerState<RecordPage> {
         backgroundColor: colorScheme.surface,
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RecordCreatePage()),
-            ),
-          ),
+              icon: Icon(Icons.edit),
+              onPressed: () => {
+                    ref.watch(recordProvider.notifier).clear(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RecordCreatePage()),
+                    ),
+                  }),
         ],
       ),
       body: ListView(
