@@ -79,21 +79,6 @@ class _IntroPageState extends ConsumerState<IntroPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Container(
-                    width: size.height / 6,
-                    height: size.height / 24,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          alignment: Alignment.center,
-                          image: AssetImage("images/kakao_login.png")),
-                    ),
-                  ),
-                  onTap: () => debugPrint("pressed"),
-                ),
                 SizedBox(
                   height: 18,
                 ),

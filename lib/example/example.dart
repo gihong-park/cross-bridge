@@ -1,11 +1,14 @@
 import 'package:_04_health_check/class/enum.dart';
 import 'package:_04_health_check/class/model/record/recordModel.dart';
-import 'package:_04_health_check/class/model/workout/workout.dart';
+import 'package:_04_health_check/class/model/movement/movement.dart';
+import 'package:_04_health_check/class/model/workoutOftheDay/workoutOftheDay.dart';
+import 'package:_04_health_check/class/provider/uuid.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:uuid/uuid.dart';
 
-const _uuid = Uuid();
+final _uuid = ProviderContainer().read(uuidProvider);
 
 class RecordDTO {
   RecordDTO(
@@ -24,7 +27,7 @@ final records = [
     date: DateTime.now().subtract(const Duration(days: 0)),
     type: "EMOM",
     name: "Body Shock",
-    hashtags: ["row", "bbjo", "powerclean"],
+    hashtags: ["row", "bbjo", "powerclean", "row", "bbjo", "powerclean"],
   ),
   RecordDTO(
     date: DateTime.now().subtract(const Duration(days: 1)),
@@ -129,4 +132,43 @@ const List<String> movements = [
   "Farmer's carries",
   'Sled pushes',
   'Sled pulls',
+];
+
+final wods = [
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby1",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby2",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby3",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby4",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
+  WorkoutOftheDay(
+      id: _uuid.v4(),
+      name: "Strong Baby5",
+      type: "EMOM",
+      description: "hi",
+      movements: []),
 ];

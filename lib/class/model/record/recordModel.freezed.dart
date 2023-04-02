@@ -20,10 +20,10 @@ RecordModel _$RecordModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RecordModel {
-  Map<String, int> get result => throw _privateConstructorUsedError;
-  bool get isWOD => throw _privateConstructorUsedError;
+  WorkoutOftheDay? get wod => throw _privateConstructorUsedError;
+  String get note => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  List<Workout> get workouts => throw _privateConstructorUsedError;
+  List<Movement> get movements => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,10 +38,12 @@ abstract class $RecordModelCopyWith<$Res> {
       _$RecordModelCopyWithImpl<$Res, RecordModel>;
   @useResult
   $Res call(
-      {Map<String, int> result,
-      bool isWOD,
+      {WorkoutOftheDay? wod,
+      String note,
       DateTime date,
-      List<Workout> workouts});
+      List<Movement> movements});
+
+  $WorkoutOftheDayCopyWith<$Res>? get wod;
 }
 
 /// @nodoc
@@ -57,29 +59,41 @@ class _$RecordModelCopyWithImpl<$Res, $Val extends RecordModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = null,
-    Object? isWOD = null,
+    Object? wod = freezed,
+    Object? note = null,
     Object? date = null,
-    Object? workouts = null,
+    Object? movements = null,
   }) {
     return _then(_value.copyWith(
-      result: null == result
-          ? _value.result
-          : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
-      isWOD: null == isWOD
-          ? _value.isWOD
-          : isWOD // ignore: cast_nullable_to_non_nullable
-              as bool,
+      wod: freezed == wod
+          ? _value.wod
+          : wod // ignore: cast_nullable_to_non_nullable
+              as WorkoutOftheDay?,
+      note: null == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      workouts: null == workouts
-          ? _value.workouts
-          : workouts // ignore: cast_nullable_to_non_nullable
-              as List<Workout>,
+      movements: null == movements
+          ? _value.movements
+          : movements // ignore: cast_nullable_to_non_nullable
+              as List<Movement>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WorkoutOftheDayCopyWith<$Res>? get wod {
+    if (_value.wod == null) {
+      return null;
+    }
+
+    return $WorkoutOftheDayCopyWith<$Res>(_value.wod!, (value) {
+      return _then(_value.copyWith(wod: value) as $Val);
+    });
   }
 }
 
@@ -92,10 +106,13 @@ abstract class _$$_RecordModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, int> result,
-      bool isWOD,
+      {WorkoutOftheDay? wod,
+      String note,
       DateTime date,
-      List<Workout> workouts});
+      List<Movement> movements});
+
+  @override
+  $WorkoutOftheDayCopyWith<$Res>? get wod;
 }
 
 /// @nodoc
@@ -109,28 +126,28 @@ class __$$_RecordModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = null,
-    Object? isWOD = null,
+    Object? wod = freezed,
+    Object? note = null,
     Object? date = null,
-    Object? workouts = null,
+    Object? movements = null,
   }) {
     return _then(_$_RecordModel(
-      result: null == result
-          ? _value._result
-          : result // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
-      isWOD: null == isWOD
-          ? _value.isWOD
-          : isWOD // ignore: cast_nullable_to_non_nullable
-              as bool,
+      wod: freezed == wod
+          ? _value.wod
+          : wod // ignore: cast_nullable_to_non_nullable
+              as WorkoutOftheDay?,
+      note: null == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      workouts: null == workouts
-          ? _value._workouts
-          : workouts // ignore: cast_nullable_to_non_nullable
-              as List<Workout>,
+      movements: null == movements
+          ? _value._movements
+          : movements // ignore: cast_nullable_to_non_nullable
+              as List<Movement>,
     ));
   }
 }
@@ -139,37 +156,31 @@ class __$$_RecordModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RecordModel implements _RecordModel {
   const _$_RecordModel(
-      {required final Map<String, int> result,
-      required this.isWOD,
+      {required this.wod,
+      required this.note,
       required this.date,
-      required final List<Workout> workouts})
-      : _result = result,
-        _workouts = workouts;
+      required final List<Movement> movements})
+      : _movements = movements;
 
   factory _$_RecordModel.fromJson(Map<String, dynamic> json) =>
       _$$_RecordModelFromJson(json);
 
-  final Map<String, int> _result;
   @override
-  Map<String, int> get result {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_result);
-  }
-
+  final WorkoutOftheDay? wod;
   @override
-  final bool isWOD;
+  final String note;
   @override
   final DateTime date;
-  final List<Workout> _workouts;
+  final List<Movement> _movements;
   @override
-  List<Workout> get workouts {
+  List<Movement> get movements {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_workouts);
+    return EqualUnmodifiableListView(_movements);
   }
 
   @override
   String toString() {
-    return 'RecordModel(result: $result, isWOD: $isWOD, date: $date, workouts: $workouts)';
+    return 'RecordModel(wod: $wod, note: $note, date: $date, movements: $movements)';
   }
 
   @override
@@ -177,20 +188,17 @@ class _$_RecordModel implements _RecordModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RecordModel &&
-            const DeepCollectionEquality().equals(other._result, _result) &&
-            (identical(other.isWOD, isWOD) || other.isWOD == isWOD) &&
+            (identical(other.wod, wod) || other.wod == wod) &&
+            (identical(other.note, note) || other.note == note) &&
             (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._workouts, _workouts));
+            const DeepCollectionEquality()
+                .equals(other._movements, _movements));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_result),
-      isWOD,
-      date,
-      const DeepCollectionEquality().hash(_workouts));
+  int get hashCode => Object.hash(runtimeType, wod, note, date,
+      const DeepCollectionEquality().hash(_movements));
 
   @JsonKey(ignore: true)
   @override
@@ -208,22 +216,22 @@ class _$_RecordModel implements _RecordModel {
 
 abstract class _RecordModel implements RecordModel {
   const factory _RecordModel(
-      {required final Map<String, int> result,
-      required final bool isWOD,
+      {required final WorkoutOftheDay? wod,
+      required final String note,
       required final DateTime date,
-      required final List<Workout> workouts}) = _$_RecordModel;
+      required final List<Movement> movements}) = _$_RecordModel;
 
   factory _RecordModel.fromJson(Map<String, dynamic> json) =
       _$_RecordModel.fromJson;
 
   @override
-  Map<String, int> get result;
+  WorkoutOftheDay? get wod;
   @override
-  bool get isWOD;
+  String get note;
   @override
   DateTime get date;
   @override
-  List<Workout> get workouts;
+  List<Movement> get movements;
   @override
   @JsonKey(ignore: true)
   _$$_RecordModelCopyWith<_$_RecordModel> get copyWith =>

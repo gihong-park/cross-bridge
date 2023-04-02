@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'workout.dart';
+part of 'movement.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
+_$_Movement _$$_MovementFromJson(Map<String, dynamic> json) => _$_Movement(
       id: json['id'] as String,
-      level: $enumDecode(_$LevelEnumMap, json['level']),
       name: json['name'] as String,
       weight: (json['weight'] as num).toDouble(),
       cal: json['cal'] as int,
@@ -16,19 +15,12 @@ _$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
       reps: json['reps'] as int,
     );
 
-Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
+Map<String, dynamic> _$$_MovementToJson(_$_Movement instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'level': _$LevelEnumMap[instance.level]!,
       'name': instance.name,
       'weight': instance.weight,
       'cal': instance.cal,
       'distance': instance.distance,
       'reps': instance.reps,
     };
-
-const _$LevelEnumMap = {
-  Level.lv1: 'lv1',
-  Level.lv2: 'lv2',
-  Level.lv3: 'lv3',
-};

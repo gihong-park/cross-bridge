@@ -1,4 +1,5 @@
-import 'package:_04_health_check/class/model/workout/workout.dart';
+import 'package:_04_health_check/class/model/movement/movement.dart';
+import 'package:_04_health_check/class/model/workoutOftheDay/workoutOftheDay.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,23 +11,30 @@ class Record extends _$Record {
   @override
   RecordModel build() {
     return RecordModel(
-        result: {}, workouts: [], isWOD: false, date: DateTime.now());
+        wod: null, note: "", movements: [], date: DateTime.now());
   }
 
-  void toggleWOD(bool isWOD) {
-    state = state.copyWith(isWOD: isWOD);
+  void setRecord(RecordModel record) {
+    state = record;
   }
 
-  void addWodItem(Workout wodItem) {
-    state = state.copyWith(workouts: [...state.workouts, wodItem]);
+  void setWOD(WorkoutOftheDay? wod) {
+    state = state.copyWith(wod: wod);
   }
 
-  void setWodItem(Workout editedItem) {
-    state = state.copyWith(workouts: [
-      for (final item in state.workouts)
+  void setNote(String note) {
+    state = state.copyWith(note: note);
+  }
+
+  void addMovement(Movement movement) {
+    state = state.copyWith(movements: [...state.movements, movement]);
+  }
+
+  void setMovement(Movement editedItem) {
+    state = state.copyWith(movements: [
+      for (final item in state.movements)
         if (item.id == editedItem.id)
           item.copyWith(
-              level: editedItem.level,
               name: editedItem.name,
               reps: editedItem.reps,
               cal: editedItem.cal,
@@ -37,20 +45,20 @@ class Record extends _$Record {
     ]);
   }
 
-  void removeWodItem(Workout wodItem) {
+  void removeMovement(Movement movement) {
     state = state.copyWith(
-      workouts: [
-        ...state.workouts.where((element) => element.id != wodItem.id)
+      movements: [
+        ...state.movements.where((element) => element.id != movement.id)
       ],
     );
   }
 
   void clear() {
-    state = RecordModel(
-        result: {}, workouts: [], isWOD: false, date: DateTime.now());
+    state =
+        RecordModel(wod: null, movements: [], note: "", date: DateTime.now());
   }
 
-  void addResult(String key, int value) {
-    state = state.copyWith(result: {...state.result, key: value});
-  }
+  // void addResult(String key, int value) {
+  //   state = state.copyWith(result: {...state.result, key: value});
+  // }
 }

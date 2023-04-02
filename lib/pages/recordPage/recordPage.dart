@@ -1,6 +1,11 @@
 import 'package:_04_health_check/class/extension.dart';
+import 'package:_04_health_check/class/model/movement/movement.dart';
+import 'package:_04_health_check/class/model/record/recordModel.dart';
+import 'package:_04_health_check/class/provider/record.dart';
+import 'package:_04_health_check/class/provider/uuid.dart';
 import 'package:_04_health_check/example/example.dart';
 import 'package:_04_health_check/pages/recordCreatePage/recordCreatePage.dart';
+import 'package:_04_health_check/pages/recordDetailPage/recordDetailPage.dart';
 import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -128,7 +133,47 @@ class _RecordPageState extends ConsumerState<RecordPage> {
                     ),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
-                      onTap: () => debugPrint("pressed"),
+                      onTap: () {
+                        ref.watch(recordProvider.notifier).setRecord(
+                              RecordModel(
+                                wod: wods[0],
+                                note: "note is important",
+                                date: DateTime.now(),
+                                movements: [
+                                  Movement(
+                                    cal: 0,
+                                    distance: 0,
+                                    id: ref.watch(uuidProvider).v4(),
+                                    name: "Burpees",
+                                    weight: 0,
+                                    reps: 20,
+                                  ),
+                                  Movement(
+                                    cal: 20,
+                                    distance: 0,
+                                    id: ref.watch(uuidProvider).v4(),
+                                    name: "Rowing",
+                                    weight: 0,
+                                    reps: 0,
+                                  ),
+                                  Movement(
+                                    cal: 0,
+                                    distance: 0,
+                                    id: ref.watch(uuidProvider).v4(),
+                                    name: "Power Cleans",
+                                    weight: 135,
+                                    reps: 8,
+                                  ),
+                                ],
+                              ),
+                            );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RecordDetailPage(),
+                          ),
+                        );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(14.0),
                         child: Column(
@@ -151,6 +196,7 @@ class _RecordPageState extends ConsumerState<RecordPage> {
                                   "",
                                   (value, element) =>
                                       value += "#" + element + " "),
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: colorScheme.secondaryContainer),
                             ),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'workout.dart';
+part of 'movement.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,14 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Workout _$WorkoutFromJson(Map<String, dynamic> json) {
-  return _Workout.fromJson(json);
+Movement _$MovementFromJson(Map<String, dynamic> json) {
+  return _Movement.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Workout {
+mixin _$Movement {
   String get id => throw _privateConstructorUsedError;
-  Level get level => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get weight => throw _privateConstructorUsedError;
   int get cal => throw _privateConstructorUsedError;
@@ -30,28 +29,23 @@ mixin _$Workout {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $WorkoutCopyWith<Workout> get copyWith => throw _privateConstructorUsedError;
+  $MovementCopyWith<Movement> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WorkoutCopyWith<$Res> {
-  factory $WorkoutCopyWith(Workout value, $Res Function(Workout) then) =
-      _$WorkoutCopyWithImpl<$Res, Workout>;
+abstract class $MovementCopyWith<$Res> {
+  factory $MovementCopyWith(Movement value, $Res Function(Movement) then) =
+      _$MovementCopyWithImpl<$Res, Movement>;
   @useResult
   $Res call(
-      {String id,
-      Level level,
-      String name,
-      double weight,
-      int cal,
-      int distance,
-      int reps});
+      {String id, String name, double weight, int cal, int distance, int reps});
 }
 
 /// @nodoc
-class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
-    implements $WorkoutCopyWith<$Res> {
-  _$WorkoutCopyWithImpl(this._value, this._then);
+class _$MovementCopyWithImpl<$Res, $Val extends Movement>
+    implements $MovementCopyWith<$Res> {
+  _$MovementCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,7 +56,6 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
   @override
   $Res call({
     Object? id = null,
-    Object? level = null,
     Object? name = null,
     Object? weight = null,
     Object? cal = null,
@@ -74,10 +67,6 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as Level,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -103,49 +92,39 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
 }
 
 /// @nodoc
-abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
-  factory _$$_WorkoutCopyWith(
-          _$_Workout value, $Res Function(_$_Workout) then) =
-      __$$_WorkoutCopyWithImpl<$Res>;
+abstract class _$$_MovementCopyWith<$Res> implements $MovementCopyWith<$Res> {
+  factory _$$_MovementCopyWith(
+          _$_Movement value, $Res Function(_$_Movement) then) =
+      __$$_MovementCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      Level level,
-      String name,
-      double weight,
-      int cal,
-      int distance,
-      int reps});
+      {String id, String name, double weight, int cal, int distance, int reps});
 }
 
 /// @nodoc
-class __$$_WorkoutCopyWithImpl<$Res>
-    extends _$WorkoutCopyWithImpl<$Res, _$_Workout>
-    implements _$$_WorkoutCopyWith<$Res> {
-  __$$_WorkoutCopyWithImpl(_$_Workout _value, $Res Function(_$_Workout) _then)
+class __$$_MovementCopyWithImpl<$Res>
+    extends _$MovementCopyWithImpl<$Res, _$_Movement>
+    implements _$$_MovementCopyWith<$Res> {
+  __$$_MovementCopyWithImpl(
+      _$_Movement _value, $Res Function(_$_Movement) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? level = null,
     Object? name = null,
     Object? weight = null,
     Object? cal = null,
     Object? distance = null,
     Object? reps = null,
   }) {
-    return _then(_$_Workout(
+    return _then(_$_Movement(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      level: null == level
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
-              as Level,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -172,23 +151,20 @@ class __$$_WorkoutCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Workout implements _Workout {
-  const _$_Workout(
+class _$_Movement implements _Movement {
+  const _$_Movement(
       {required this.id,
-      required this.level,
       required this.name,
       required this.weight,
       required this.cal,
       required this.distance,
       required this.reps});
 
-  factory _$_Workout.fromJson(Map<String, dynamic> json) =>
-      _$$_WorkoutFromJson(json);
+  factory _$_Movement.fromJson(Map<String, dynamic> json) =>
+      _$$_MovementFromJson(json);
 
   @override
   final String id;
-  @override
-  final Level level;
   @override
   final String name;
   @override
@@ -202,16 +178,15 @@ class _$_Workout implements _Workout {
 
   @override
   String toString() {
-    return 'Workout(id: $id, level: $level, name: $name, weight: $weight, cal: $cal, distance: $distance, reps: $reps)';
+    return 'Movement(id: $id, name: $name, weight: $weight, cal: $cal, distance: $distance, reps: $reps)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Workout &&
+            other is _$_Movement &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.level, level) || other.level == level) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.cal, cal) || other.cal == cal) &&
@@ -223,38 +198,35 @@ class _$_Workout implements _Workout {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, level, name, weight, cal, distance, reps);
+      Object.hash(runtimeType, id, name, weight, cal, distance, reps);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WorkoutCopyWith<_$_Workout> get copyWith =>
-      __$$_WorkoutCopyWithImpl<_$_Workout>(this, _$identity);
+  _$$_MovementCopyWith<_$_Movement> get copyWith =>
+      __$$_MovementCopyWithImpl<_$_Movement>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_WorkoutToJson(
+    return _$$_MovementToJson(
       this,
     );
   }
 }
 
-abstract class _Workout implements Workout {
-  const factory _Workout(
+abstract class _Movement implements Movement {
+  const factory _Movement(
       {required final String id,
-      required final Level level,
       required final String name,
       required final double weight,
       required final int cal,
       required final int distance,
-      required final int reps}) = _$_Workout;
+      required final int reps}) = _$_Movement;
 
-  factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
+  factory _Movement.fromJson(Map<String, dynamic> json) = _$_Movement.fromJson;
 
   @override
   String get id;
-  @override
-  Level get level;
   @override
   String get name;
   @override
@@ -267,6 +239,6 @@ abstract class _Workout implements Workout {
   int get reps;
   @override
   @JsonKey(ignore: true)
-  _$$_WorkoutCopyWith<_$_Workout> get copyWith =>
+  _$$_MovementCopyWith<_$_Movement> get copyWith =>
       throw _privateConstructorUsedError;
 }

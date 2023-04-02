@@ -1,5 +1,7 @@
 import 'package:_04_health_check/class/enum.dart';
 import 'package:flutter/material.dart';
+import 'package:suggester/suggester.dart';
+import 'package:suggester/term_mapping.dart';
 
 const List<Level> lvList = <Level>[
   Level.lv1,

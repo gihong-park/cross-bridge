@@ -91,27 +91,6 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     child:
                         const Text("Sign Up", style: TextStyle(fontSize: 20)),
                   ),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  Text("or sign up with",
-                      style: TextStyle(color: colorScheme.primary)),
-                  const SizedBox(height: 18),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Container(
-                      width: size.height / 6,
-                      height: size.height / 25,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            alignment: Alignment.center,
-                            image: AssetImage("images/kakao_login.png")),
-                      ),
-                    ),
-                    onTap: () => debugPrint("pressed"),
-                  ),
                 ],
               ),
             ),

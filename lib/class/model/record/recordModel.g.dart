@@ -8,18 +8,20 @@ part of 'recordModel.dart';
 
 _$_RecordModel _$$_RecordModelFromJson(Map<String, dynamic> json) =>
     _$_RecordModel(
-      result: Map<String, int>.from(json['result'] as Map),
-      isWOD: json['isWOD'] as bool,
+      wod: json['wod'] == null
+          ? null
+          : WorkoutOftheDay.fromJson(json['wod'] as Map<String, dynamic>),
+      note: json['note'] as String,
       date: DateTime.parse(json['date'] as String),
-      workouts: (json['workouts'] as List<dynamic>)
-          .map((e) => Workout.fromJson(e as Map<String, dynamic>))
+      movements: (json['movements'] as List<dynamic>)
+          .map((e) => Movement.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$_RecordModelToJson(_$_RecordModel instance) =>
     <String, dynamic>{
-      'result': instance.result,
-      'isWOD': instance.isWOD,
+      'wod': instance.wod,
+      'note': instance.note,
       'date': instance.date.toIso8601String(),
-      'workouts': instance.workouts,
+      'movements': instance.movements,
     };
