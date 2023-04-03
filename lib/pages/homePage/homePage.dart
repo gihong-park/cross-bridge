@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:_04_health_check/pages/dashboardPage/dashboardPage.dart';
 import 'package:_04_health_check/pages/introPage/introPage.dart';
+import 'package:_04_health_check/pages/profilePage/profilePage.dart';
 import 'package:_04_health_check/pages/recordPage/recordPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     List<Widget> pages = [
       DashboardPage(),
       RecordPage(),
-      DashboardPage(),
+      ProfilePage(),
     ];
     final colorScheme = Theme.of(context).colorScheme;
     final page = ref.watch(pageProvider);
