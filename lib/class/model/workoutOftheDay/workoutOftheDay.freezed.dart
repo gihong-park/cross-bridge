@@ -25,6 +25,7 @@ mixin _$WorkoutOftheDay {
   String get type => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<Movement> get movements => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $WorkoutOftheDayCopyWith<$Res> {
       String name,
       String type,
       String description,
-      List<Movement> movements});
+      List<Movement> movements,
+      DateTime date});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$WorkoutOftheDayCopyWithImpl<$Res, $Val extends WorkoutOftheDay>
     Object? type = null,
     Object? description = null,
     Object? movements = null,
+    Object? date = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -86,6 +89,10 @@ class _$WorkoutOftheDayCopyWithImpl<$Res, $Val extends WorkoutOftheDay>
           ? _value.movements
           : movements // ignore: cast_nullable_to_non_nullable
               as List<Movement>,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$_WorkoutOftheDayCopyWith<$Res>
       String name,
       String type,
       String description,
-      List<Movement> movements});
+      List<Movement> movements,
+      DateTime date});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_WorkoutOftheDayCopyWithImpl<$Res>
     Object? type = null,
     Object? description = null,
     Object? movements = null,
+    Object? date = null,
   }) {
     return _then(_$_WorkoutOftheDay(
       id: null == id
@@ -144,6 +153,10 @@ class __$$_WorkoutOftheDayCopyWithImpl<$Res>
           ? _value._movements
           : movements // ignore: cast_nullable_to_non_nullable
               as List<Movement>,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$_WorkoutOftheDay implements _WorkoutOftheDay {
       required this.name,
       required this.type,
       required this.description,
-      required final List<Movement> movements})
+      required final List<Movement> movements,
+      required this.date})
       : _movements = movements;
 
   factory _$_WorkoutOftheDay.fromJson(Map<String, dynamic> json) =>
@@ -178,8 +192,11 @@ class _$_WorkoutOftheDay implements _WorkoutOftheDay {
   }
 
   @override
+  final DateTime date;
+
+  @override
   String toString() {
-    return 'WorkoutOftheDay(id: $id, name: $name, type: $type, description: $description, movements: $movements)';
+    return 'WorkoutOftheDay(id: $id, name: $name, type: $type, description: $description, movements: $movements, date: $date)';
   }
 
   @override
@@ -193,13 +210,14 @@ class _$_WorkoutOftheDay implements _WorkoutOftheDay {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality()
-                .equals(other._movements, _movements));
+                .equals(other._movements, _movements) &&
+            (identical(other.date, date) || other.date == date));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, type, description,
-      const DeepCollectionEquality().hash(_movements));
+      const DeepCollectionEquality().hash(_movements), date);
 
   @JsonKey(ignore: true)
   @override
@@ -221,7 +239,8 @@ abstract class _WorkoutOftheDay implements WorkoutOftheDay {
       required final String name,
       required final String type,
       required final String description,
-      required final List<Movement> movements}) = _$_WorkoutOftheDay;
+      required final List<Movement> movements,
+      required final DateTime date}) = _$_WorkoutOftheDay;
 
   factory _WorkoutOftheDay.fromJson(Map<String, dynamic> json) =
       _$_WorkoutOftheDay.fromJson;
@@ -236,6 +255,8 @@ abstract class _WorkoutOftheDay implements WorkoutOftheDay {
   String get description;
   @override
   List<Movement> get movements;
+  @override
+  DateTime get date;
   @override
   @JsonKey(ignore: true)
   _$$_WorkoutOftheDayCopyWith<_$_WorkoutOftheDay> get copyWith =>

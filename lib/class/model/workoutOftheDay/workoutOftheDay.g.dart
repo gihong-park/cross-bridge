@@ -15,6 +15,7 @@ _$_WorkoutOftheDay _$$_WorkoutOftheDayFromJson(Map<String, dynamic> json) =>
       movements: (json['movements'] as List<dynamic>)
           .map((e) => Movement.fromJson(e as Map<String, dynamic>))
           .toList(),
+      date: DateTime.parse(json['date'] as String),
     );
 
 Map<String, dynamic> _$$_WorkoutOftheDayToJson(_$_WorkoutOftheDay instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_WorkoutOftheDayToJson(_$_WorkoutOftheDay instance) =>
       'type': instance.type,
       'description': instance.description,
       'movements': instance.movements,
+      'date': instance.date.toIso8601String(),
     };

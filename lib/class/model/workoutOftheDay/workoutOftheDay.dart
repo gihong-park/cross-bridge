@@ -12,6 +12,7 @@ class WorkoutOftheDay with _$WorkoutOftheDay {
     required String type,
     required String description,
     required List<Movement> movements,
+    required DateTime date,
   }) = _WorkoutOftheDay;
 
   factory WorkoutOftheDay.fromJson(Map<String, Object?> json) =>
