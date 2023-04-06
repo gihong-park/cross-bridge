@@ -54,22 +54,26 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: const InputDecoration(
                             labelText: "Name",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: const InputDecoration(
                             labelText: "Email",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           obscureText: true,
                           decoration: const InputDecoration(
                             labelText: "Password",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           obscureText: true,
                           decoration: const InputDecoration(
                             labelText: "Confirm Password",

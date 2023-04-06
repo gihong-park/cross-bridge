@@ -53,11 +53,13 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: InputDecoration(
                             labelText: "Email",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: "Password",

@@ -54,26 +54,31 @@ class _ConfirmPageState extends ConsumerState<ConfirmPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: InputDecoration(
                             labelText: "Gender",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: InputDecoration(
                             labelText: "BirthDay",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: InputDecoration(
                             labelText: "Weight",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           decoration: InputDecoration(
                             labelText: "Height",
                           ),
                         ),
                         TextFormField(
+                          style: TextStyle(color: colorScheme.onBackground),
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: "Level",
