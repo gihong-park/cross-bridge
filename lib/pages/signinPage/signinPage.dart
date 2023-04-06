@@ -72,7 +72,8 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                     height: 18,
                   ),
                   CBButton(
-                      onPressed: () => debugPrint("pressed"),
+                      onPressed: () => Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/', (route) => false),
                       child: Text("Sign In", style: TextStyle(fontSize: 20))),
                 ],
               ),
