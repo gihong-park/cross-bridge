@@ -97,6 +97,7 @@ class _RecordCreatePageState extends ConsumerState<RecordCreatePage> {
                       weight: 0,
                       cal: 0,
                       distance: 0,
+                      height: 0,
                       reps: 0)),
             ),
             SizedBox(height: 18),

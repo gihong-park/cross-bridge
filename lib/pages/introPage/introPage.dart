@@ -1,6 +1,8 @@
+import 'package:_04_health_check/class/const.dart';
 import 'package:_04_health_check/pages/loginPage/loginPage.dart';
 import 'package:_04_health_check/pages/signinPage/signinPage.dart';
 import 'package:_04_health_check/pages/signupPage/signupPage.dart';
+import 'package:_04_health_check/widgets/cbButton/cbButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -74,7 +76,8 @@ class _IntroPageState extends ConsumerState<IntroPage> {
             ),
           ),
           Positioned(
-            left: 32,
+            left: horizontalPadding,
+            right: horizontalPadding,
             bottom: size.height / 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,31 +87,46 @@ class _IntroPageState extends ConsumerState<IntroPage> {
                 ),
                 Row(
                   children: [
-                    TextButton(
-                      child: Text(
-                        "sign in",
-                        style: TextStyle(color: colorScheme.primary),
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SigninPage(),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: OutlinedButton(
+                        child: Text(
+                          "sign in",
+                          style: TextStyle(color: colorScheme.primary),
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SigninPage(),
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                          side: BorderSide(
+                              width: 1.0, color: colorScheme.primary),
                         ),
                       ),
                     ),
-                    Text(
-                      " / ",
-                      style: GoogleFonts.aBeeZee(color: Color(0xFFF3AF20)),
-                    ),
-                    TextButton(
-                      child: Text(
-                        "sign up",
-                        style: TextStyle(color: colorScheme.primary),
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupPage(),
+                    SizedBox(width: 12),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: OutlinedButton(
+                        child: Text(
+                          "sign up",
+                          style: TextStyle(color: colorScheme.primary),
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupPage(),
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                          side: BorderSide(
+                              width: 1.0, color: colorScheme.primary),
                         ),
                       ),
                     ),

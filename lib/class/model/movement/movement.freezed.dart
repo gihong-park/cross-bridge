@@ -25,6 +25,7 @@ mixin _$Movement {
   double get weight => throw _privateConstructorUsedError;
   int get cal => throw _privateConstructorUsedError;
   int get distance => throw _privateConstructorUsedError;
+  double get height => throw _privateConstructorUsedError;
   int get reps => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +40,13 @@ abstract class $MovementCopyWith<$Res> {
       _$MovementCopyWithImpl<$Res, Movement>;
   @useResult
   $Res call(
-      {String id, String name, double weight, int cal, int distance, int reps});
+      {String id,
+      String name,
+      double weight,
+      int cal,
+      int distance,
+      double height,
+      int reps});
 }
 
 /// @nodoc
@@ -60,6 +67,7 @@ class _$MovementCopyWithImpl<$Res, $Val extends Movement>
     Object? weight = null,
     Object? cal = null,
     Object? distance = null,
+    Object? height = null,
     Object? reps = null,
   }) {
     return _then(_value.copyWith(
@@ -83,6 +91,10 @@ class _$MovementCopyWithImpl<$Res, $Val extends Movement>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as int,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double,
       reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
@@ -99,7 +111,13 @@ abstract class _$$_MovementCopyWith<$Res> implements $MovementCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id, String name, double weight, int cal, int distance, int reps});
+      {String id,
+      String name,
+      double weight,
+      int cal,
+      int distance,
+      double height,
+      int reps});
 }
 
 /// @nodoc
@@ -118,6 +136,7 @@ class __$$_MovementCopyWithImpl<$Res>
     Object? weight = null,
     Object? cal = null,
     Object? distance = null,
+    Object? height = null,
     Object? reps = null,
   }) {
     return _then(_$_Movement(
@@ -141,6 +160,10 @@ class __$$_MovementCopyWithImpl<$Res>
           ? _value.distance
           : distance // ignore: cast_nullable_to_non_nullable
               as int,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double,
       reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
@@ -158,6 +181,7 @@ class _$_Movement implements _Movement {
       required this.weight,
       required this.cal,
       required this.distance,
+      required this.height,
       required this.reps});
 
   factory _$_Movement.fromJson(Map<String, dynamic> json) =>
@@ -174,11 +198,13 @@ class _$_Movement implements _Movement {
   @override
   final int distance;
   @override
+  final double height;
+  @override
   final int reps;
 
   @override
   String toString() {
-    return 'Movement(id: $id, name: $name, weight: $weight, cal: $cal, distance: $distance, reps: $reps)';
+    return 'Movement(id: $id, name: $name, weight: $weight, cal: $cal, distance: $distance, height: $height, reps: $reps)';
   }
 
   @override
@@ -192,13 +218,14 @@ class _$_Movement implements _Movement {
             (identical(other.cal, cal) || other.cal == cal) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
+            (identical(other.height, height) || other.height == height) &&
             (identical(other.reps, reps) || other.reps == reps));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, weight, cal, distance, reps);
+      Object.hash(runtimeType, id, name, weight, cal, distance, height, reps);
 
   @JsonKey(ignore: true)
   @override
@@ -221,6 +248,7 @@ abstract class _Movement implements Movement {
       required final double weight,
       required final int cal,
       required final int distance,
+      required final double height,
       required final int reps}) = _$_Movement;
 
   factory _Movement.fromJson(Map<String, dynamic> json) = _$_Movement.fromJson;
@@ -235,6 +263,8 @@ abstract class _Movement implements Movement {
   int get cal;
   @override
   int get distance;
+  @override
+  double get height;
   @override
   int get reps;
   @override

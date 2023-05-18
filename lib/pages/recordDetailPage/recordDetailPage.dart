@@ -104,6 +104,7 @@ class _RecordDetailPageState extends ConsumerState<RecordDetailPage> {
                     weight: 0,
                     cal: 0,
                     distance: 0,
+                    height: 0,
                     reps: 0)),
           ),
           SizedBox(height: 18),

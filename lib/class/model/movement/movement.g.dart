@@ -12,6 +12,7 @@ _$_Movement _$$_MovementFromJson(Map<String, dynamic> json) => _$_Movement(
       weight: (json['weight'] as num).toDouble(),
       cal: json['cal'] as int,
       distance: json['distance'] as int,
+      height: (json['height'] as num).toDouble(),
       reps: json['reps'] as int,
     );
 
@@ -22,5 +23,6 @@ Map<String, dynamic> _$$_MovementToJson(_$_Movement instance) =>
       'weight': instance.weight,
       'cal': instance.cal,
       'distance': instance.distance,
+      'height': instance.height,
       'reps': instance.reps,
     };

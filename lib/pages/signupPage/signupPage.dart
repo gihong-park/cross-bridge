@@ -1,4 +1,5 @@
 import 'package:_04_health_check/pages/confirmPage/confirmPage.dart';
+import 'package:_04_health_check/pages/signinPage/signinPage.dart';
 import 'package:_04_health_check/widgets/cbButton/cbButton.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -89,7 +90,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ConfirmPage(),
+                        builder: (context) => SigninPage(),
                       ),
                     ),
                     child:

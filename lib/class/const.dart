@@ -9,7 +9,7 @@ const List<Level> lvList = <Level>[
   Level.lv3,
 ];
 
-const horizontalPadding = 32.0;
+const horizontalPadding = 24.0;
 const maxHorizontalSize = 475.0;
 const maxVerticalSize = 812.0;
 const maxSize = Size(maxHorizontalSize, maxVerticalSize);

@@ -1,4 +1,3 @@
-
 import 'package:_04_health_check/class/enum.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,6 +13,7 @@ class Movement with _$Movement {
       required double weight,
       required int cal,
       required int distance,
+      required double height,
       required int reps}) = _Movement;
 
   factory Movement.fromJson(Map<String, Object?> json) =>

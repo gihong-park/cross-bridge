@@ -110,6 +110,13 @@ class _MovementCardState extends ConsumerState<MovementCard> {
                       onChanged: (v) => widget.onChanged?.call(widget.movement
                           .copyWith(weight: v.isEmpty ? 0 : double.parse(v))),
                     ),
+                    ValueWidget(
+                      enabled: widget.enabled,
+                      unit: "height",
+                      value: widget.movement.height.toString(),
+                      onChanged: (v) => widget.onChanged?.call(widget.movement
+                          .copyWith(weight: v.isEmpty ? 0 : double.parse(v))),
+                    ),
                   ],
                 ),
               ],
